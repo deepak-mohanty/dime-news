@@ -1,0 +1,133 @@
+.appHeader {
+    // border-bottom: 1px solid var(--border-color);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: var(--white-background);
+
+    .appHeader--wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 0;
+
+        a {
+            border: none;
+            font-size: 16px;
+            color: var(--text-primary);
+            padding: 10px 22px 10px 20px;
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            &:hover {
+                color: var(--text-primary);
+                background-color: transparent;
+            }
+
+            &.active {
+                color: var(--brand-color);
+            }
+        }
+
+        .appHeaderLogo {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .appHeaderName {
+            font-weight: 400;
+            white-space: pre;
+            padding-left: 10px;
+            font-weight: 600;
+            font-size: 24px;
+            position: relative;
+        }
+
+        .appHeader_content {
+            display: flex;
+            align-items: center;
+
+            .appHeader__list {
+                display: flex;
+                margin: 0;
+                padding-right: 60px;
+
+                .appHeader__listItem {
+                    text-decoration: none;
+                    list-style-type: none;
+                }
+            }
+
+            .appHeader__info {
+                display: flex;
+                align-items: center;
+                margin: 0;
+
+                .appHeader__infoItem {
+                    text-decoration: none;
+                    list-style-type: none;
+                    font-size: 14px;
+                    padding-right: 30px;
+                    position: relative;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        width: 2px;
+                        background-color: var(--text-primary);
+                        height: 20px;
+                        background-color: var(--border-color);
+                        right: 14px;
+                        top: 0px;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+
+                        &:after {
+                            content: none;
+                        }
+                    }
+
+                    .weatherInfo {
+                        display: flex;
+                        flex-direction: column;
+
+                        img {
+                            width: 20px;
+                            height: 20px;
+                        }
+
+                        .tempDetails {
+                            .temp {
+                                text-align: center;
+                                font-size: 18px;
+
+                                sup {
+                                    font-size: 10px;
+                                }
+                            }
+
+                            .location {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+}
