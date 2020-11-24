@@ -5,35 +5,36 @@ import {Link} from 'react-router-dom';
 import '../assets/styles/individualInfo.scss';
 import TopCards from './Cards/TopCards';
 
-function SportsNews(props) {
+function TravelNews(props) {
 
-    const [sportsNews, setSportsNews] = useState([]);
+    const [travelNews, setTravelsNews] = useState([]);
 
     // //Top Sports useEffect
     useEffect(() => {
-        const getSportsNews = async () => {
+        const getTravelsNews = async () => {
             try{
                 const response = await apiInstance.get('/everything', {
                     params: {
                         // country: 'uk',
-                        q: 'athletics',
+                        q: 'travel',
                         sortBy: 'popularity'
                     }
                 })
-                return setSportsNews(response.data.articles);
+                return setTravelsNews(response.data.articles);
             }
             catch(error){
                 console.error(error);
             }
         }
-        getSportsNews();
+        getTravelsNews();
     }, [])
 
-    const sNews =sportsNews.splice(0,3);
+    const tvlNews = travelNews.splice(0,3);
+    console.log(travelNews)
     
     return (
-        <TopCards title={props.heading} newsListType={sNews} />
+        <TopCards title={props.heading} newsListType={tvlNews} />
     )
 }
 
-export default SportsNews
+export default TravelNews;

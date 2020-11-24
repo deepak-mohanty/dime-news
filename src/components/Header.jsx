@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../assets/styles/header.scss';
 import { NavLink, Link } from 'react-router-dom';
 import brandLogo from '../assets/images/news.png';
 
 function Header() {
+    const [navbar, setNavbar] = useState(false);
+
+    const changeBackgroundOnScroll = () => {
+        if(window.scrollY >= 100){
+            setNavbar(true)
+        }
+        else{
+            setNavbar(false)
+        }
+    }
+
+    window.addEventListener('scroll', changeBackgroundOnScroll)
+
 	return (
-		<nav className="appHeader">
+		<nav className={navbar ? 'appHeader active' : 'appHeader'}>
 			<div className="container">
                 <div className="appHeader--wrapper">
                 

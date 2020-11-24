@@ -9,13 +9,13 @@ import Technology from './Technology';
 import Politics from './Politics';
 import Entertainment from './Entertainment';
 import Business from './Business';
+import Travel from './Travel';
 
 import '../assets/styles/home.scss';
 
 function Home() {
 
     const [todaysHeadlines, setTodaysHeadlines] = useState([]);
-    // const [featuredNews, setFeaturedNews] = useState([]);
 
     //Top Headlines useEffect
     useEffect(() => {
@@ -49,11 +49,12 @@ function Home() {
                 </div>
                 <div className="featured__wrapper">
                     <div className="featured__units">
-                        <SportsNews heading="Sports" />
-                        <Technology heading="Technology" />
-                        <Politics heading="Politics" />
-                        <Entertainment heading="Entertainment" />
+                        <Politics heading="Political" />
                         <Business heading="Business" />
+                        <Technology heading="Technology" />
+                        <Entertainment heading="Entertainment" />
+                        <SportsNews heading="Sports" />
+                        <Travel heading="Travel" />
                     </div>
                     <div className="featured__widgets">
                         <div>Hello List</div>

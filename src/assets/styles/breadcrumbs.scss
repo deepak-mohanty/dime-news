@@ -1,0 +1,33 @@
+.breadcrumb {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 24px;
+
+    li {
+        padding: 8px 30px 8px 0;
+        list-style-type: none;
+
+        a {
+            border: 0;
+            color: var(--text-primary);
+            padding: 0;
+
+            &:hover {
+                background-color: var(--white-background) !important;
+            }
+
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 2px;
+                height: 16px;
+                right: -16px;
+                top: 4px;
+                background-color: var(--text-primary);
+                transform: rotate(14deg);
+            }
+        }
+    }
+}

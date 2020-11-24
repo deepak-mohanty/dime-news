@@ -7,7 +7,7 @@
 
     .featured__units {
         .individualInfo__section {
-            padding-top: 48px;
+            padding-top: 86px;
 
             a {
                 border: 0;
@@ -25,9 +25,30 @@
                 justify-content: space-between;
                 align-items: center;
                 padding-bottom: 24px;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0px;
+                    height: 2px;
+                    background-color: var(--text-black);
+                    width: 100%;
+                    z-index: -1;
+                }
 
                 h2 {
                     font-size: 24px;
+                    font-weight: 600;
+                    background: #fff;
+                    padding-right: 10px;
+                }
+
+                a {
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    background: #fff;
+                    padding-left: 14px;
                     font-weight: 600;
                 }
             }
@@ -37,13 +58,13 @@
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
                 grid-column-gap: 30px;
                 grid-row-gap: 40px;
-                grid-auto-rows: 480px;
                 list-style: none;
 
                 .infoSection__card--Listitem {
                     .card {
                         position: relative;
                         display: flex;
+                        height: 300px;
 
                         &:after {
 
@@ -94,7 +115,7 @@
 
                             .trending__infoHeader {
                                 // height: 70px;
-                                line-height: 1.5;
+                                line-height: 1;
                                 font-weight: 500;
 
                                 a {
@@ -127,5 +148,124 @@
             height: 100%;
             object-fit: cover;
         }
+    }
+}
+
+
+
+//Detail List
+.categoryList {
+    padding: 60px 0;
+    .categoryType {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 24px;
+
+        h1 {
+            font-weight: 500;
+            font-size: 24px;
+        }
+    }
+
+    .categoryList__Item {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        grid-column-gap: 30px;
+        grid-row-gap: 40px;
+        list-style: none;
+
+        .categoryCard {
+            .card {
+                position: relative;
+                display: flex;
+                height: 300px;
+
+                &:after {
+                    position: absolute;
+                    content: "";
+                    height: 100%;
+                    width: 100%;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent);
+                    left: 0;
+                    bottom: 0;
+                }
+
+                .card--banner {
+                    height: 100%;
+                }
+
+                .card--body {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 1;
+                    padding: 30px 16px;
+
+                    .meta {
+                        a {
+                            color: var(--text-white);
+                            font-size: 14px;
+                            border: 0;
+                            padding: 0;
+
+                            &:hover {
+                                background-color: var(--white-background);
+                            }
+
+                            &:last-child {
+                                position: relative;
+                                padding-left: 30px;
+
+                                &:after {
+                                    position: absolute;
+                                    content: "/";
+                                    height: 20px;
+                                    width: 10px;
+                                    left: 8px;
+                                    top: 50%;
+                                    margin-top: -10px;
+                                    line-height: 20px;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+
+                    .trending__infoHeader {
+                        // height: 70px;
+                        line-height: 1;
+                        font-weight: 500;
+
+                        a {
+                            color: var(--text-white);
+                            font-size: 18px;
+                            border: 0;
+                            line-height: 1.5;
+                            padding: 0;
+
+                            &:hover {
+                                background-color: var(--white-background);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.categoryNotFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 200px);
+
+    .categoryNotFoundImg {
+        width: 500px;
+        padding-bottom: 30px;
     }
 }
