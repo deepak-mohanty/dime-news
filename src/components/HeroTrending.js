@@ -34,7 +34,7 @@ function HeroTrending(props) {
                                 </div>
                                 <h2 className="trending__infoHeader">
                                     <Link to="/">
-                                        {news.title.substring(0, 50) + '...'}
+                                        {news.title.substring(0, 70) + '...'}
                                     </Link>
                                 </h2>
                                 <p className="trending__infoDesc">{news.description && news.description.substring(0, 120) + '...'}</p>

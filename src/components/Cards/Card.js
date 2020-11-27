@@ -15,7 +15,7 @@ const Card = ({cardInfo}) => {
                     </div>
                 </div>
                 <h2 className="trending__infoHeader">
-                    <Link to="/">{cardInfo.title.substring(0, 40) + '...'}</Link>
+                    <Link to={{pathname: `/${cardInfo.title.toLowerCase().replace(/ /g,'-')}`, query: {cardDetail: cardInfo} }}>{cardInfo.title.substring(0, 40) + '...'}</Link>
                 </h2>
             </div>
         </div>

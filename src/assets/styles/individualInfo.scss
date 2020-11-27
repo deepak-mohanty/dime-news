@@ -156,15 +156,18 @@
 //Detail List
 .categoryList {
     padding: 60px 0;
+
     .categoryType {
         display: flex;
         align-items: center;
         font-weight: 500;
         font-size: 24px;
+        padding-bottom: 36px;
 
         h1 {
             font-weight: 500;
             font-size: 24px;
+            padding-left: 5px;
         }
     }
 
@@ -211,7 +214,7 @@
                             padding: 0;
 
                             &:hover {
-                                background-color: var(--white-background);
+                                background-color: transparent;
                             }
 
                             &:last-child {
@@ -246,11 +249,45 @@
                             padding: 0;
 
                             &:hover {
-                                background-color: var(--white-background);
+                                background-color: transparent;
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .innerHeader {
+        position: relative;
+
+        .innerHeader__details {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .backArrowWrapper {
+        position: absolute;
+        top: 6px;
+        left: -110px;
+        display: flex;
+        align-items: center;
+
+        span {
+            padding-left: 6px;
+        }
+
+        a {
+            border: 0;
+            height: auto;
+            display: flex;
+            align-items: center;
+            padding: 0;
+
+            &:hover {
+                background-color: transparent;
+                color: var(--text-primar);
             }
         }
     }
@@ -267,5 +304,35 @@
     .categoryNotFoundImg {
         width: 500px;
         padding-bottom: 30px;
+    }
+}
+
+
+.loadMore__wrapper {
+    margin: 0 auto;
+    width: max-content;
+    padding: 80px 0;
+
+    @media screen and (max-width: 767px) {
+        padding: 56px 0;
+    }
+}
+
+button {
+    background-color: var(--brand-color);
+    border: 0;
+    padding: 10px 26px;
+    color: var(--text-white);
+    border-radius: 2px;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus {
+        border: 0;
+        outline: none;
     }
 }

@@ -12,28 +12,29 @@ function Entertainment(props) {
     // //Top Sports useEffect
     useEffect(() => {
         const getEntertainmentNews = async () => {
-            try{
-                const response = await apiInstance.get('/everything', {
-                    params: {
-                        // country: 'uk',
-                        q: 'entertainment',
-                        sortBy: 'popularity'
-                    }
-                })
-                return setEntertainmentNews(response.data.articles);
-            }
-            catch(error){
-                console.error(error);
-            }
+            // try{
+            //     const response = await apiInstance.get('/everything', {
+            //         params: {
+            //             // country: 'uk',
+            //             q: 'entertainment',
+            //             sortBy: 'popularity'
+            //         }
+            //     })
+            //     return setEntertainmentNews(response.data.articles);
+            // }
+            // catch(error){
+            //     console.error(error);
+            // }
         }
         getEntertainmentNews();
 
     }, []);
 
     const eNews = entertainmentNews.splice(0,3);
+    const allEntertainmentList = entertainmentNews;
 
     return (
-        <TopCards title={props.heading} newsListType={eNews} />
+        <TopCards title={props.heading} newsListType={eNews} newsAllList={allEntertainmentList} />
     )
 }
 
