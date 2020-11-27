@@ -25,7 +25,7 @@ function Business(props) {
                 console.error(error);
             }
         }
-        getBusinessNews();
+        // getBusinessNews();
 
     }, []);
 
