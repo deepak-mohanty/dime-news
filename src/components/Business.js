@@ -12,10 +12,10 @@ function Business(props) {
     useEffect(() => {
         const getBusinessNews = async () => {
             try{
-                const response = await apiInstance.get('/everything', {
+                const response = await apiInstance.get('/top-headlines', {
                     params: {
                         // country: 'uk',
-                        q: 'Finance',
+                        q: 'business',
                         sortBy: 'popularity'
                     }
                 })

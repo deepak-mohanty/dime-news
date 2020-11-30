@@ -1,9 +1,12 @@
 import React from 'react'
+import Pagination from './Utils/Pagination';
 
 function Category() {
     return (
-        <div>
-            <h4>Hello from Category</h4>
+        <div className="personalisedNews__wrapper">
+            <div className="container">
+                <Pagination />
+            </div>
         </div>
     )
 }

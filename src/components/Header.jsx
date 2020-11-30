@@ -33,13 +33,7 @@ function Header() {
                                 <NavLink to="/" exact={true} activeClassName="active">Home</NavLink>
                             </li>
                             <li className="appHeader__listItem">
-                                <NavLink to="/categories"  activeClassName="active">Categories</NavLink>
-                            </li>
-                            <li className="appHeader__listItem">
-                                <NavLink to="/world">World</NavLink>
-                            </li>
-                            <li className="appHeader__listItem">
-                                <NavLink to="/sports">Sports</NavLink>
+                                <NavLink to="/categories"  activeClassName="active">Personalized News</NavLink>
                             </li>
                             <li className="appHeader__listItem">
                                 <NavLink to="/contact">Contact</NavLink>

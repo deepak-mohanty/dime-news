@@ -4,39 +4,36 @@ import apiInstance from '../apis/api';
 import '../assets/styles/individualInfo.scss';
 import TopCards from './Cards/TopCards';
 
-function Entertainment(props) {
-    
-    const [entertainmentNews, setEntertainmentNews] = useState([]);
+function HealthNews(props) {
+
+    const [healthNews, setHealthNews] = useState([]);
 
     // //Top Sports useEffect
     useEffect(() => {
-        const getEntertainmentNews = async () => {
+        const getHealthNews = async () => {
             try{
                 const response = await apiInstance.get('/top-headlines', {
                     params: {
                         // country: 'uk',
-                        q: 'entertainment',
+                        q: 'health',
                         sortBy: 'popularity'
                     }
                 })
-                return setEntertainmentNews(response.data.articles);
+                return setHealthNews(response.data.articles);
             }
             catch(error){
                 console.error(error);
             }
         }
-        // getEntertainmentNews();
+        // getHealthNews();
+    }, [])
 
-    }, []);
-
-    const eNews = entertainmentNews.splice(0,3);
-    const allEntertainmentList = entertainmentNews;
-
+    const healthNewsThree = healthNews.splice(0,3);
+    const allHealthNews = healthNews;
+    
     return (
-       <>
-        {eNews ? <TopCards title={props.heading} newsListType={eNews} newsAllList={allEntertainmentList} /> : " Hello"}
-       </>
+        <TopCards title={props.heading} newsListType={healthNewsThree} newsAllList={allHealthNews} />
     )
 }
 
-export default Entertainment;
+export default HealthNews;

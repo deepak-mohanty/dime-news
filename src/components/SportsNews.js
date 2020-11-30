@@ -12,21 +12,21 @@ function SportsNews(props) {
     // //Top Sports useEffect
     useEffect(() => {
         const getSportsNews = async () => {
-            // try{
-            //     const response = await apiInstance.get('/everything', {
-            //         params: {
-            //             // country: 'uk',
-            //             q: 'athletics',
-            //             sortBy: 'popularity'
-            //         }
-            //     })
-            //     return setSportsNews(response.data.articles);
-            // }
-            // catch(error){
-            //     console.error(error);
-            // }
+            try{
+                const response = await apiInstance.get('/top-headlines', {
+                    params: {
+                        // country: 'uk',
+                        q: 'sports',
+                        sortBy: 'popularity'
+                    }
+                })
+                return setSportsNews(response.data.articles);
+            }
+            catch(error){
+                console.error(error);
+            }
         }
-        getSportsNews();
+        // getSportsNews();
     }, [])
 
     const sNews = sportsNews.splice(0,3);

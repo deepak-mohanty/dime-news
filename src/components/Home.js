@@ -6,10 +6,11 @@ import NewsHighlights from './NewsHighlights';
 // import FeaturedNews from './FeaturedNews';
 import SportsNews from './SportsNews';
 import Technology from './Technology';
-import Politics from './Politics';
+import General from './General';
 import Entertainment from './Entertainment';
 import Business from './Business';
-import Travel from './Travel';
+import HealthNews from './Health';
+import ScienceNews from './Science';
 
 import '../assets/styles/home.scss';
 
@@ -39,7 +40,6 @@ function Home() {
     },[]);
 
 
-
     return (
         <div>
             <div className="container">
@@ -49,12 +49,13 @@ function Home() {
                 </div>
                 <div className="featured__wrapper">
                     <div className="featured__units">
-                        <Politics heading="Political" />
+                        <General heading="General" />
+                        <HealthNews heading="Health" />
                         <Business heading="Business" />
                         <Technology heading="Technology" />
+                        <ScienceNews heading="Science" />
                         <Entertainment heading="Entertainment" />
                         <SportsNews heading="Sports" />
-                        <Travel heading="Travel" />
                     </div>
                     <div className="featured__widgets">
                         <div>Hello List</div>

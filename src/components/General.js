@@ -10,10 +10,10 @@ function Politics(props) {
     useEffect(() => {
         const getpoliticalNews = async () => {
             try{
-                const response = await apiInstance.get('/everything', {
+                const response = await apiInstance.get('/top-headlines', {
                     params: {
                         // country: 'uk',
-                        q: 'politics',
+                        q: 'general',
                         sortBy: 'popularity'
                     }
                 })

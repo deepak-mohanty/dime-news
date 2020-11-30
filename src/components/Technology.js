@@ -12,21 +12,21 @@ function Technology(props) {
     // //Top Sports useEffect
     useEffect(() => {
         const getTechnologyNews = async () => {
-            // try{
-            //     const response = await apiInstance.get('/everything', {
-            //         params: {
-            //             // country: 'uk',
-            //             q: 'technology',
-            //             sortBy: 'popularity'
-            //         }
-            //     })
-            //     return setTechnologyNews(response.data.articles);
-            // }
-            // catch(error){
-            //     console.error(error);
-            // }
+            try{
+                const response = await apiInstance.get('/top-headlines', {
+                    params: {
+                        // country: 'uk',
+                        q: 'technology',
+                        sortBy: 'popularity'
+                    }
+                })
+                return setTechnologyNews(response.data.articles);
+            }
+            catch(error){
+                console.error(error);
+            }
         }
-        getTechnologyNews();
+        // getTechnologyNews();
     }, []);
 
     const techNews = technologyNews.splice(0,3);

@@ -16,12 +16,13 @@ const DetailNews = (props) => {
         const getAllCategoryList = () => {
                 let category = props.location.query.categoryList.splice(0, loadMore);
                 if(category.length){
-                    setCategoryList(category)
+                    return setCategoryList(category)
                 }
         }
         getAllCategoryList();   
     }, [loadMore]);
 
+    console.log(categoryList)
 
     return (
         <div className="categoryList">
@@ -41,7 +42,7 @@ const DetailNews = (props) => {
                     </div>
                 </div>
                 {
-                    categoryList.length ?   
+                    categoryList ?   
                         <>
                             <ul className="categoryList__Item">
                                 {
@@ -62,7 +63,7 @@ const DetailNews = (props) => {
                 }
 
                 <div className="loadMore__wrapper">
-                    <button className="primary-btn loadMore--btn" onClick={() => setLoadMore(loadMore+3)}>Load More</button>
+                    <button className="primary-btn loadMore--btn" onClick={() => setLoadMore(loadMore+4)}>Load More</button>
                 </div>
 
             </div>

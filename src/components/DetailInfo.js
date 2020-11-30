@@ -1,23 +1,29 @@
 import React,{useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import '../assets/styles/detailInfo.scss';
 import published from '../assets/images/published.svg';
 import user from '../assets/images/user.svg';
 import backArrow from '../assets/images/arrow-left.svg';
+import NoData from '../assets/images/no-data.png';
 
 const DetailInfo = (props) => {
     const [indiDetail, setIndiDetail] = useState([]);
 
     useEffect(() => {
         const setIndiDetailFunc = () => {
-            return setIndiDetail(props.location.query.cardDetail)
+            let cardDetail = props.history.location.query.cardDetail;
+            if(cardDetail === 'undefined'){
+                props.history.push('/')
+            }
+            else{
+                return setIndiDetail(cardDetail)
+            }
         }
 
         setIndiDetailFunc();
     }, []);
 
-    console.log(indiDetail.url)
     return (
         <div className="detailInfo__wrapper">
             <div className="container">
@@ -51,7 +57,10 @@ const DetailInfo = (props) => {
                                 </a>
                             </div>
                         </>
-                        : <div>Not Found</div>
+                        :  <div className="categoryNotFound">
+                            <img src={NoData} className="categoryNotFoundImg" />
+                            <div>No Categories Found</div>
+                        </div>
                     }
                     <div className="detailInfo__right">
                         Hello
