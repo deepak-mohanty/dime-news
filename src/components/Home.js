@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import apiInstance from '../apis/api';
+import {newsApiInstance} from '../apis/api';
 import HeroTrending from './HeroTrending';
 import NewsHighlights from './NewsHighlights';
 // import FeaturedNews from './FeaturedNews';
@@ -21,21 +21,21 @@ function Home() {
     //Top Headlines useEffect
     useEffect(() => {
         const getNews = async () => {
-            // try{
-            //     const response = await apiInstance.get('/top-headlines', {
-            //         params: {
-            //             country: 'IN',
-            //             q: 'all'
-            //         }
-            //     });
-            //     return setTodaysHeadlines(response.data.articles);
-            // }
-            // catch (error) {
-            //     console.error(error);
-            // }
+            try{
+                const response = await newsApiInstance.get('/top-headlines', {
+                    params: {
+                        country: 'IN',
+                        q: 'all'
+                    }
+                });
+                return setTodaysHeadlines(response.data.articles);
+            }
+            catch (error) {
+                console.error(error);
+            }
         };
 
-        getNews();
+        // getNews();
 
     },[]);
 

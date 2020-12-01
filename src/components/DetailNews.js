@@ -22,7 +22,7 @@ const DetailNews = (props) => {
         getAllCategoryList();   
     }, [loadMore]);
 
-    console.log(categoryList)
+
 
     return (
         <div className="categoryList">

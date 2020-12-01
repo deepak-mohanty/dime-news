@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../assets/styles/header.scss';
 import { NavLink, Link } from 'react-router-dom';
 import brandLogo from '../assets/images/news.png';
+import Moment from 'moment';
 
 function Header() {
     const [navbar, setNavbar] = useState(false);
@@ -16,6 +17,8 @@ function Header() {
     }
 
     window.addEventListener('scroll', changeBackgroundOnScroll)
+
+    console.log('Language ', Moment.locale())
 
 	return (
 		<nav className={navbar ? 'appHeader active' : 'appHeader'}>
@@ -43,12 +46,12 @@ function Header() {
                         <ul className="appHeader__info">
                             <li className="appHeader__infoItem">
                                 <div className="timeline">
-                                    Current Time <span>13:00</span>
+                                    Current Time <span>{Moment().format('HH:mm a')}</span>
                                 </div>
                             </li>
                             <li className="appHeader__infoItem">
                                 <div className="date">
-                                    <span>15th Oct, 2019</span>
+                                    <span>{Moment().format("MMM Do YYYY")}</span>
                                 </div>
                             </li>
                             <li className="appHeader__infoItem">

@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import apiInstance from '../apis/api';
+import {newsApiInstance} from '../apis/api';
 
 import {Link} from 'react-router-dom'; 
 import '../assets/styles/individualInfo.scss';
@@ -13,7 +13,7 @@ function Technology(props) {
     useEffect(() => {
         const getTechnologyNews = async () => {
             try{
-                const response = await apiInstance.get('/top-headlines', {
+                const response = await newsApiInstance.get('/top-headlines', {
                     params: {
                         // country: 'uk',
                         q: 'technology',

@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
-import apiInstance from '../apis/api';
+import {newsApiInstance} from '../apis/api';
+
 import '../assets/styles/individualInfo.scss';
 import TopCards from './Cards/TopCards';
 
@@ -10,11 +11,11 @@ function Politics(props) {
     useEffect(() => {
         const getpoliticalNews = async () => {
             try{
-                const response = await apiInstance.get('/top-headlines', {
+                const response = await newsApiInstance.get('/top-headlines', {
                     params: {
-                        // country: 'uk',
-                        q: 'general',
-                        sortBy: 'popularity'
+                        country: 'US',
+                        category: 'general',
+                        sortBy: 'popularity',
                     }
                 })
                 return setPoliticalsNews(response.data.articles);
@@ -26,11 +27,12 @@ function Politics(props) {
         getpoliticalNews();
     }, []);
 
-    const politicsNews = politicalNews.splice(0,3);
+    const topPoliticsNews = politicalNews.splice(0,3);
     const allPoliticalNews = politicalNews;
 
+
     return (
-        <TopCards title={props.heading} newsListType={politicsNews} newsAllList={allPoliticalNews} />
+        <TopCards title={props.heading} newsListType={topPoliticsNews} newsAllList={allPoliticalNews} />
     )
 }
 

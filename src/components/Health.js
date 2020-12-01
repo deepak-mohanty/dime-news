@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import apiInstance from '../apis/api';
+import {newsApiInstance} from '../apis/api';
 
 import '../assets/styles/individualInfo.scss';
 import TopCards from './Cards/TopCards';
@@ -12,7 +12,7 @@ function HealthNews(props) {
     useEffect(() => {
         const getHealthNews = async () => {
             try{
-                const response = await apiInstance.get('/top-headlines', {
+                const response = await newsApiInstance.get('/top-headlines', {
                     params: {
                         // country: 'uk',
                         q: 'health',
