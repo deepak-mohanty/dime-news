@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {newsApiInstance} from '../apis/api';
 
-import {Link} from 'react-router-dom'; 
 import '../assets/styles/individualInfo.scss';
 import TopCards from './Cards/TopCards';
 

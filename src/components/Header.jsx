@@ -1,11 +1,15 @@
-import React, {useState} from 'react';
-import '../assets/styles/header.scss';
+import React, {useState, useEffect} from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import brandLogo from '../assets/images/news.png';
 import Moment from 'moment';
+import {weatherApiInstance} from '../apis/api';
+
+import '../assets/styles/header.scss';
+import brandLogo from '../assets/images/news.png';
 
 function Header() {
     const [navbar, setNavbar] = useState(false);
+    const [weatherData, setWeatherData] = useState('');
+    const [coordinates, setCoordinates] = useState([]);
 
     const changeBackgroundOnScroll = () => {
         if(window.scrollY >= 100){
@@ -15,10 +19,60 @@ function Header() {
             setNavbar(false)
         }
     }
+    window.addEventListener('scroll', changeBackgroundOnScroll);
 
-    window.addEventListener('scroll', changeBackgroundOnScroll)
+    useEffect(()=>{
+        const getCoordinates = () => {
+            let options = {
+                enableHighAccuracy: true, 
+                timeout: 1000, 
+                maximumAge: 100 
+            }
 
-    console.log('Language ', Moment.locale())
+            const success = (pos) => {
+                var crd = pos.coords; 
+                var lat = crd.latitude.toString(); 
+                var lng = crd.longitude.toString(); 
+                var coordinates = [Math.floor(lat), Math.floor(lng)]; 
+                setCoordinates(coordinates); 
+                clearTimeout(options.timeout)
+                return; 
+            }
+            function error(err) { 
+                console.warn(`ERROR(${err.code}): ${err.message}`); 
+                  clearTimeout(options.timeout)
+            } 
+            if (navigator.geolocation) {
+                window.navigator.geolocation.getCurrentPosition(success, error, options);
+            }
+        }
+
+        getCoordinates();
+
+    }, []);
+
+    useEffect(()=>{
+        const getWeatherData = async () => {
+            try{
+                const responseWeatherData = await weatherApiInstance.get('/weather',{
+                    params:{
+                        lat: coordinates[0],
+                        lon: coordinates[1],
+                    }
+                });
+
+                return setWeatherData(responseWeatherData.data)
+            }
+            catch(error){
+                console.log('Weather Data Not Found')
+            }
+        } 
+
+        getWeatherData();
+
+    }, [coordinates]);
+
+    // console.log('Coordinate', coordinates)
 
 	return (
 		<nav className={navbar ? 'appHeader active' : 'appHeader'}>
@@ -58,9 +112,9 @@ function Header() {
                                 <div className="weatherInfo">
                                     <div className="tempDetails">
                                         <div className="temp">
-                                            30 <sup>0</sup>C
+                                            {weatherData ? (weatherData.main.temp - 273).toFixed(2) : ""}<sup>0</sup>C
                                         </div>
-                                        <div className="location">Koraput, Odisha</div>
+                                        <div className="location">{weatherData ? weatherData.name : ""}, {weatherData ? weatherData.sys.country : ""}</div>
                                     </div>
                                 </div>
                             </li>
@@ -74,3 +128,5 @@ function Header() {
 }
 
 export default Header;
+
+// (weatherData.main.temp - 273).toFixed(2)

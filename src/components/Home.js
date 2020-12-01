@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {newsApiInstance} from '../apis/api';
 import HeroTrending from './HeroTrending';
 import NewsHighlights from './NewsHighlights';
-// import FeaturedNews from './FeaturedNews';
+import FeaturedNews from './FeaturedNews';
 import SportsNews from './SportsNews';
 import Technology from './Technology';
 import General from './General';
