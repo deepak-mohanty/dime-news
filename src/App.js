@@ -20,7 +20,7 @@ function App() {
             <Route path="/categories" exact={true} component={Category} />
             <Route path="/category/:name" exact={true} component={DetailNews} />
             <Route path="/:info" exact={true} component={DetailInfo} />
-            <Redirect to="/" />
+            <Redirect to="*" component={Notfound} />
           </Switch>
         </Router>
 

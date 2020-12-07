@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Card = ({cardInfo}) => {
+const Card = ({cardInfo, imageLoad}) => {
     return(
         <div className="card">
             <div className="card--banner">
-                <img src={cardInfo.urlToImage} alt="" aria-hidden="false" />
+               <img src={cardInfo.urlToImage} alt="" aria-hidden="false" />
             </div>
             <div className="card--body">
                 <div className="meta meta__seperatot">

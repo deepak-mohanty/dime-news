@@ -5,34 +5,35 @@ import '../assets/styles/individualInfo.scss';
 import TopCards from './Cards/TopCards';
 
 function Politics(props) {
-    const [politicalNews, setPoliticalsNews] = useState([]);
+    const [generalNews, setGeneralNews] = useState([]);
 
     //Top Political useEffect
     useEffect(() => {
-        const getpoliticalNews = async () => {
+        const getGeneralNews = async () => {
             try{
                 const response = await newsApiInstance.get('/top-headlines', {
                     params: {
                         country: 'US',
                         category: 'general',
                         sortBy: 'popularity',
+                        pageSize: 100
                     }
                 })
-                return setPoliticalsNews(response.data.articles);
+                return setGeneralNews(response.data.articles);
             }
             catch(error){
                 console.error(error);
             }
         }
-        getpoliticalNews();
+        getGeneralNews();
     }, []);
 
-    const topPoliticsNews = politicalNews.splice(0,3);
-    const allPoliticalNews = politicalNews;
+    const topGeneralNews = generalNews.splice(0,3);
+    const allGeneralNews = generalNews;
 
 
     return (
-        <TopCards title={props.heading} newsListType={topPoliticsNews} newsAllList={allPoliticalNews} />
+        <TopCards title={props.heading} newsListType={topGeneralNews} newsAllList={allGeneralNews} />
     )
 }
 

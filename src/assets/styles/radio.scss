@@ -1,0 +1,9 @@
+.radio_wrapper {
+    display: flex;
+    align-items: center;
+
+    span {
+        text-transform: capitalize;
+        padding-left: 10px;
+    }
+}
