@@ -108,16 +108,20 @@ function Header() {
                                     <span>{Moment().format("MMM Do YYYY")}</span>
                                 </div>
                             </li>
-                            <li className="appHeader__infoItem">
-                                <div className="weatherInfo">
-                                    <div className="tempDetails">
-                                        <div className="temp">
-                                            {weatherData ? (weatherData.main.temp - 273).toFixed(2) : ""}<sup>0</sup>C
+                            {
+                                weatherData ? 
+                                    <li className="appHeader__infoItem">
+                                        <div className="weatherInfo">
+                                            <div className="tempDetails">
+                                                <div className="temp">
+                                                    {weatherData ? (weatherData.main.temp - 273).toFixed(2) : ""}<sup>0</sup>C
+                                                </div>
+                                                <div className="location">{weatherData ? weatherData.name : ""}, {weatherData ? weatherData.sys.country : ""}</div>
+                                            </div>
                                         </div>
-                                        <div className="location">{weatherData ? weatherData.name : ""}, {weatherData ? weatherData.sys.country : ""}</div>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li>
+                                : ""
+                            }
                         </ul>
                     </div>
                 

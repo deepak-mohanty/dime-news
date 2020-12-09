@@ -1,0 +1,27 @@
+.scroll-top {
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    bottom: 10%;
+    right: 30px;
+    z-index: 2;
+    transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    color: red;
+    padding: 20px;
+    background-color: var(--brand-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.scroll-top-img {
+    width: 28px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}

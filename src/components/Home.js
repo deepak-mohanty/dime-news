@@ -6,11 +6,12 @@ import NewsHighlights from './NewsHighlights';
 import FeaturedNews from './FeaturedNews';
 import SportsNews from './SportsNews';
 import Technology from './Technology';
-import General from './General';
+import General from './Pages/General';
 import Entertainment from './Entertainment';
 import Business from './Business';
 import HealthNews from './Health';
 import ScienceNews from './Science';
+import ScrollToTop from './Utils/ScrollToTop';
 
 import '../assets/styles/home.scss';
 
@@ -42,6 +43,7 @@ function Home() {
 
     return (
         <div>
+            <ScrollToTop showBelow={20} />
             <div className="container">
                 <div className="bannerSection">
                     <HeroTrending trendingNews={todaysHeadlines} />

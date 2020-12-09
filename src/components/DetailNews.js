@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import RadioButton from './Utils/Radio';
 import {newsApiInstance} from '../apis/api';
 import Select from 'react-select';
+import CardLoader from './Utils/CardLoader';
+import ScrollToTop from './Utils/ScrollToTop';
 
 import NoData from '../assets/images/no-data.png';
 import backArrow from '../assets/images/arrow-left.svg';
@@ -16,7 +18,8 @@ import Card from './Cards/Card';
 
 const DetailNews = (props) => {
 
-    const selectedCategory = props.match.params.name.replace(/\b\w/g, function(l){ return l.toLowerCase() });
+    const selectedCategory = props.location.title;
+    // const selectedCategory = props.match.params.name.replace(/\b\w/g, function(l){ return l.toLowerCase() });
     
     const [categoryList, setCategoryList] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,7 +27,6 @@ const DetailNews = (props) => {
     const [activeGridView, setACtiveGridView] = useState(true);
     const [activeListView, setACtiveListView] = useState(false);
     const [checkedValue, setCheckedValue] = useState(selectedCategory)
-    const [testeList, setTestList] = useState('');
 
     const sortByOptions = [
         {value: "publishedAt", label: "PublishedAt"},
@@ -48,7 +50,7 @@ const DetailNews = (props) => {
             try{
                 const response = await newsApiInstance.get('/everything', {
                     params:{
-                        q: selectedCategory,
+                        q: checkedValue,
                         language: 'en',
                         sortBy: sortBy,
                         pageSize: 100
@@ -56,7 +58,6 @@ const DetailNews = (props) => {
                 });
 
                 setCategoryList(response.data.articles);
-                setTestList(response.data.status)
             }
             catch(error){
                 console.log('Error', error.message)
@@ -84,11 +85,13 @@ const DetailNews = (props) => {
     }
 
     const radioSelectHandler = (e) => {
-        return setCheckedValue(e.target.value)
+        setCheckedValue(e.target.value);
+        setLoading(false)
     }
 
     return (
         <div className="categoryList">
+            <ScrollToTop showBelow={300} />
             <div className="container">
                 <div className="innerHeader">
                     <div className="backArrowWrapper">
@@ -100,7 +103,7 @@ const DetailNews = (props) => {
                     <div className="innerHeader__details">
                        <AppBreadCrumbs />
                         <div className="categoryType">
-                            Category : <h1>{props.match.params.name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}</h1>
+                            Category : <h1>{checkedValue.toUpperCase()}</h1>
                         </div>
                     </div>
                 </div>
@@ -125,6 +128,7 @@ const DetailNews = (props) => {
                         </div>
                     </div>
                     <div className="filteredNews__right">
+
                         {/* Filtered Header */}
                         <div className="filteredNews__right--infoHeader">
 
@@ -138,30 +142,29 @@ const DetailNews = (props) => {
                             </div>
                             
                             <div className="filteredNews__sort">
-                                <div className="filteredHeader">Sort By</div>
+                                <div className="filteredHeader">Sort By: </div>
                                 <Select options={sortByOptions} onChange={(e) => onSortByChange(e)} disabled="true" />
                             </div>
 
                         </div>
                         
-                         <div className="filteredNews--list filteredNews__grid">
-                                {
-                                    categoryList ?   
-                                        <ul className="categoryList__Item">
-                                            {
-                                                categoryList.length && categoryList.map((list, index) => {
-                                                    return (
-                                                        <li className="categoryCard" key={index}>
-                                                            {loading ? <Card cardInfo={list}/> : "Loading ..."}
-                                                        </li>
-                                                    )
-                                                })
-                                            }
-                                        </ul>
-                                        : <div className="categoryNotFound">
-                                            <img src={NoData} className="categoryNotFoundImg" />
-                                            <div>No Categories Found</div>
-                                        </div>
+                         <div className={`filteredNews--list ${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' } `}>
+                                {categoryList ?   
+                                    <ul className="categoryList__Item">
+                                        {
+                                            categoryList.length ? categoryList.map((list, index) => {
+                                                return (
+                                                    <li className="categoryCard" key={index}>
+                                                        {loading ? <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> : "Loading ..."}
+                                                    </li>
+                                                )
+                                            }) :   <CardLoader />
+                                        }
+                                    </ul>
+                                    : <div className="categoryNotFound">
+                                        <img src={NoData} className="categoryNotFoundImg" />
+                                        <div>No Categories Found</div>
+                                    </div>
                                 }
                         </div>
 
@@ -175,10 +178,3 @@ const DetailNews = (props) => {
 }
 
 export default DetailNews;
-
-
-          // <select id="sort_by" onChange={(e) => onSortByChange(e)}>
-                                //     <option value="publishedAt">PublishedAt</option>
-                                //     <option value="relevancy">Relevancy</option>
-                                //     <option value="popularity">Popularity</option>
-                                // </select>

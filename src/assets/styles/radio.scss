@@ -1,9 +1,11 @@
 .radio_wrapper {
     display: flex;
     align-items: center;
+    padding-bottom: 3px;
 
     span {
         text-transform: capitalize;
         padding-left: 10px;
+        font-weight: 500;
     }
 }

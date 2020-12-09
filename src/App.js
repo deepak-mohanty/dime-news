@@ -18,7 +18,7 @@ function App() {
           <Switch>
             <Route path="/" component={Home} exact={true}/>
             <Route path="/categories" exact={true} component={Category} />
-            <Route path="/category/:name" exact={true} component={DetailNews} />
+            <Route path="/category" exact={true} component={DetailNews} />
             <Route path="/:info" exact={true} component={DetailInfo} />
             <Redirect to="*" component={Notfound} />
           </Switch>
