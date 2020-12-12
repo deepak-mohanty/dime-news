@@ -17,15 +17,18 @@ const Card = ({cardInfo, viewType}) => {
             <div className="card--body">
                 <div className="meta meta__seperatot">
                     <div className="meta__left">
-                        <Link to="/">{cardInfo.source.name}</Link>
+                        <Link to="/">{cardInfo.source.name.substring(0, 16) + '...'}</Link>
                         <Link to="/">{cardInfo.publishedAt.split('T')[0]}</Link>
                     </div>
                 </div>
-                <h2 className="trending__infoHeader">
-                    <Link to={{pathname: `/${(cardInfo.title.toLowerCase()).replace(/ /g, "-")}`, query: {cardDetail: cardInfo} }}>
-                        {viewType === 'filteredNews--list' ? cardInfo.title : cardInfo.title.substring(0, 40) + '...'}
-                    </Link>
-                </h2>
+                  <h2 className="trending__infoHeader">
+                       {
+                           cardInfo.title ?  <Link to={{pathname: `/${(cardInfo.title.toLowerCase()).replace(/ /g, "-")}`, query: {cardDetail: cardInfo} }}>
+                            {viewType === 'filteredNews--list' ? cardInfo.title : cardInfo.title.substring(0, 40) + '...' }
+                        </Link> : ""
+                       }
+                    </h2>
+
             </div>
             
         </div>
@@ -33,3 +36,5 @@ const Card = ({cardInfo, viewType}) => {
 }
 
 export default Card;
+
+// .toLowerCase()).replace(/ /g, "-")

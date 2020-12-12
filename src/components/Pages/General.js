@@ -25,7 +25,7 @@ function Politics(props) {
                 console.error(error);
             }
         }
-        getGeneralNews();
+        // getGeneralNews();
     }, []);
 
     const topGeneralNews = generalNews.splice(0,3);

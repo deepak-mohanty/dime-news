@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import AppBreadCrumbs from '../AppBreadCrumbs';
 import {Link} from 'react-router-dom';
 import RadioButton from './Utils/Radio';
+import Checkbox from './Utils/Checkbox';
 import {newsApiInstance} from '../apis/api';
 import Select from 'react-select';
 import CardLoader from './Utils/CardLoader';
@@ -18,15 +19,19 @@ import Card from './Cards/Card';
 
 const DetailNews = (props) => {
 
-    const selectedCategory = props.location.title;
+    //if selectedCategory returns undefined it will fallback to 'general category
+    const selectedCategory = props.location.title || 'general';
+
     // const selectedCategory = props.match.params.name.replace(/\b\w/g, function(l){ return l.toLowerCase() });
     
     const [categoryList, setCategoryList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [sourcesValues, setSourcesValues] = useState([]);
     const [sortBy, setSortBy] = useState('publishedAt');
     const [activeGridView, setACtiveGridView] = useState(true);
     const [activeListView, setACtiveListView] = useState(false);
-    const [checkedValue, setCheckedValue] = useState(selectedCategory)
+    const [checkedValue, setCheckedValue] = useState(selectedCategory);
+    const [isChecked, setIsChecked] = useState(false);
+    const [domainsValues, setDomainsValues] = useState("");
 
     const sortByOptions = [
         {value: "publishedAt", label: "PublishedAt"},
@@ -42,7 +47,16 @@ const DetailNews = (props) => {
         {value: 'science', name: 'science'},
         {value: 'sports', name: 'sports'},
         {value: 'technology', name: 'technology'}
-    ]
+    ];
+
+    const checkboxLIst = [
+        {value: 'Republic'},
+         {value: 'ndtv'},
+         {value: 'abpnews'}
+    ];
+
+    const allSources = (sourcesValues !== 'undefined' ?  sourcesValues : "")
+            // console.log('CategoryList', categoryList)
 
     useEffect(()=>{
 
@@ -51,8 +65,10 @@ const DetailNews = (props) => {
                 const response = await newsApiInstance.get('/everything', {
                     params:{
                         q: checkedValue,
+                        sources: '',
                         language: 'en',
                         sortBy: sortBy,
+                        page: 1,
                         pageSize: 100
                     }
                 });
@@ -64,10 +80,15 @@ const DetailNews = (props) => {
             }
         }
 
-        getAllCategoryList();  
+        // getAllCategoryList();  
 
     }, [categoryList, sortBy, checkedValue]);
 
+
+    //React Hooks to search and set the news Sources
+    categoryList && categoryList.map((elem) => {
+        console.log('ele,', elem.url.replace(/(https?:\/\/)?(www.)?/i, '').split('/')[0])
+    })
 
     const toggleActiveView = (elem) =>{
         if(elem.target.alt === 'gridView-icon'){
@@ -84,9 +105,14 @@ const DetailNews = (props) => {
         return setSortBy(e.value);
     }
 
-    const radioSelectHandler = (e) => {
-        setCheckedValue(e.target.value);
-        setLoading(false)
+    const radioSelectHandler = (e) => (
+        setCheckedValue(e.target.value)
+    )
+
+    const checkboxSelectHandler = (event) => {
+        const { name, checked } = event.target;
+        setIsChecked(checked)
+        setDomainsValues(name)
     }
 
     return (
@@ -112,18 +138,33 @@ const DetailNews = (props) => {
                     <div className="filteredNews__left">
                         <div className="filteredNews__list">
                             <div className="filteredNews__listItem">
-                                <h4 className="filteredNews__header">Category</h4>
-                                {
-                                    radioCategoryList.map((item, index)=>{
-                                        return <RadioButton 
-                                                    value={item.value} 
-                                                    key={index} 
-                                                    name={item.name} 
-                                                    selected = {checkedValue}
-                                                    onChange={(e) => radioSelectHandler(e)}  
-                                                />
-                                    })
-                                }
+                                <form>
+                                    <input type="text" placeholder="Search News, headlines" />
+                                </form>
+                                   <div className="filteredNews__listWrapper">
+                                        <h4 className="filteredNews__header">Category</h4>
+                                        {
+                                            radioCategoryList.map((item, index)=>{
+                                                return <RadioButton 
+                                                            value={item.value} 
+                                                            key={index} 
+                                                            name={item.name} 
+                                                            selected = {checkedValue}
+                                                            onChange={(e) => radioSelectHandler(e)}  
+                                                        />
+                                            })
+                                        }
+                                   </div>
+
+                                <div className="filteredNews__listWrapper">
+                                    <h4 className="filteredNews__header">Domains</h4>
+                                    {
+                                        checkboxLIst.map((item, index) => {
+                                            return <Checkbox key={index} id={index} label={item.value} name={item.value} checked={isChecked[item.value]} onChange={checkboxSelectHandler} />
+                                        })
+                                    }
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -155,7 +196,7 @@ const DetailNews = (props) => {
                                             categoryList.length ? categoryList.map((list, index) => {
                                                 return (
                                                     <li className="categoryCard" key={index}>
-                                                        {loading ? <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> : "Loading ..."}
+                                                        { <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> }
                                                     </li>
                                                 )
                                             }) :   <CardLoader />
