@@ -156,6 +156,10 @@
 //Detail List
 .categoryList {
     padding: 60px 0;
+    @media screen and (max-width: 767px){
+        padding: 36px 0 60px 0;
+        margin-bottom: 40px;
+    }
 
     .categoryType {
         display: flex;
@@ -264,10 +268,16 @@
     .innerHeader {
         position: relative;
         padding-bottom: 80px;
+        @media screen and (max-width: 767px){
+            padding-bottom: 56px;
+        }
 
         .innerHeader__details {
             display: flex;
             justify-content: space-between;
+            @media screen and (max-width: 767px){
+                flex-direction: column;
+            }
         }
     }
 
@@ -345,6 +355,15 @@ button {
 //Select from 'react-select
 .css-2b097c-container {
     min-width: 150px;
+
+    .css-b8ldur-Input {
+        input {
+            &:focus {
+                outline: none;
+                border: 1px solid #fff !important;
+            }
+        }
+    }
 
     &:focus {
         outline: none;

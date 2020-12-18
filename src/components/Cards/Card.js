@@ -23,7 +23,7 @@ const Card = ({cardInfo, viewType}) => {
                 </div>
                   <h2 className="trending__infoHeader">
                        {
-                           cardInfo.title ?  <Link to={{pathname: `/${(cardInfo.title.toLowerCase()).replace(/ /g, "-")}`, query: {cardDetail: cardInfo} }}>
+                           cardInfo.title ?  <Link to={{pathname: `/${(cardInfo.title.toLowerCase()).replace(/ /g, "-")}`, data: cardInfo }}>
                             {viewType === 'filteredNews--list' ? cardInfo.title : cardInfo.title.substring(0, 40) + '...' }
                         </Link> : ""
                        }

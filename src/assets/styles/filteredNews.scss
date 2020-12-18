@@ -12,14 +12,17 @@
                     input {
                         padding: 10px 20px;
                         width: -webkit-fill-available;
+                        width: -moz-available;
                     }
                 }
 
                 .filteredNews__listWrapper {
                     padding-bottom: 28px;
-                    &:nth-child(1){
+
+                    &:nth-child(1) {
                         padding-top: 20px;
                     }
+
                     .filteredNews__header {
                         font-size: 20px;
                         font-weight: 500;
@@ -166,4 +169,5 @@
     }
 
 }
+
 //filteredNews__wrap ends

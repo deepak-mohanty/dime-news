@@ -7,6 +7,8 @@ import {newsApiInstance} from '../apis/api';
 import Select from 'react-select';
 import CardLoader from './Utils/CardLoader';
 import ScrollToTop from './Utils/ScrollToTop';
+import SortBy from './Utils/SortBy';
+import _ from 'lodash';
 
 import NoData from '../assets/images/no-data.png';
 import backArrow from '../assets/images/arrow-left.svg';
@@ -49,14 +51,14 @@ const DetailNews = (props) => {
         {value: 'technology', name: 'technology'}
     ];
 
-    const checkboxLIst = [
-        {value: 'Republic'},
-         {value: 'ndtv'},
-         {value: 'abpnews'}
-    ];
+    radioCategoryList.sort((a,b)=>{
+        return a.name.toLowerCase() - b.name.toLowerCase();
+    })
 
-    const allSources = (sourcesValues !== 'undefined' ?  sourcesValues : "")
-            // console.log('CategoryList', categoryList)
+    //Lost of News Sources
+    const checkboxList = [];
+
+    const allSources = (sourcesValues !== 'undefined' ?  sourcesValues : "");
 
     useEffect(()=>{
 
@@ -65,7 +67,7 @@ const DetailNews = (props) => {
                 const response = await newsApiInstance.get('/everything', {
                     params:{
                         q: checkedValue,
-                        sources: '',
+                        sources: allSources,
                         language: 'en',
                         sortBy: sortBy,
                         page: 1,
@@ -80,15 +82,30 @@ const DetailNews = (props) => {
             }
         }
 
-        // getAllCategoryList();  
+        getAllCategoryList();  
 
     }, [categoryList, sortBy, checkedValue]);
 
 
     //React Hooks to search and set the news Sources
     categoryList && categoryList.map((elem) => {
-        console.log('ele,', elem.url.replace(/(https?:\/\/)?(www.)?/i, '').split('/')[0])
+        const value = elem.url.replace(/(https?:\/\/)?(www.)?/i, '').split('/')[0];
+        const name = value.split('.')[0];
+        return checkboxList.push({name: name, value: value });
     })
+
+    //Setting the Checkbox List in Alphabetic order
+    checkboxList.sort((a,b) => {
+        if(a.name.toLowerCase() < b.name.toLowerCase()){
+            return -1
+        }
+        else{
+            return 1
+        }
+    });
+
+    //Removed sorted repeating checkbox names
+    const uniqueCheckboxList = _.unionBy(checkboxList, 'name');
 
     const toggleActiveView = (elem) =>{
         if(elem.target.alt === 'gridView-icon'){
@@ -110,15 +127,18 @@ const DetailNews = (props) => {
     )
 
     const checkboxSelectHandler = (event) => {
-        const { name, checked } = event.target;
+        const { value, checked } = event.target;
         setIsChecked(checked)
-        setDomainsValues(name)
+        setDomainsValues(value)
     }
 
     return (
         <div className="categoryList">
+
             <ScrollToTop showBelow={300} />
+
             <div className="container">
+
                 <div className="innerHeader">
                     <div className="backArrowWrapper">
                         <Link to="/">
@@ -135,39 +155,56 @@ const DetailNews = (props) => {
                 </div>
 
                 <div className="filteredNews__wrapper">
+
+                    {/* Filtered News Left Items */}
                     <div className="filteredNews__left">
                         <div className="filteredNews__list">
                             <div className="filteredNews__listItem">
+
                                 <form>
-                                    <input type="text" placeholder="Search News, headlines" />
+                                    <input type="text" placeholder="Search News, Headlines ..." />
                                 </form>
-                                   <div className="filteredNews__listWrapper">
-                                        <h4 className="filteredNews__header">Category</h4>
-                                        {
-                                            radioCategoryList.map((item, index)=>{
-                                                return <RadioButton 
-                                                            value={item.value} 
-                                                            key={index} 
-                                                            name={item.name} 
-                                                            selected = {checkedValue}
-                                                            onChange={(e) => radioSelectHandler(e)}  
-                                                        />
-                                            })
-                                        }
-                                   </div>
 
                                 <div className="filteredNews__listWrapper">
-                                    <h4 className="filteredNews__header">Domains</h4>
+                                    <h4 className="filteredNews__header">Category</h4>
                                     {
-                                        checkboxLIst.map((item, index) => {
-                                            return <Checkbox key={index} id={index} label={item.value} name={item.value} checked={isChecked[item.value]} onChange={checkboxSelectHandler} />
+                                        radioCategoryList.map((item, index)=>{
+                                            return <RadioButton 
+                                                        value={item.value} 
+                                                        key={index} 
+                                                        name={item.name} 
+                                                        selected = {checkedValue}
+                                                        onChange={(e) => radioSelectHandler(e)}  
+                                                    />
                                         })
                                     }
+                                </div>
+
+                                <div className="filteredNews__listWrapper">
+                                   {uniqueCheckboxList.length ?  <h4 className="filteredNews__header">Domains</h4> : ""}
+                                    <ul className="unstyled centered">
+                                        {
+                                            uniqueCheckboxList.map((item, index) => {
+                                                return (
+                                                        <Checkbox key={index} 
+                                                            value={item.value}
+                                                            id={index} 
+                                                            label={item.name} 
+                                                            name={item.name} 
+                                                            checked={isChecked[item.name]} 
+                                                            onChange={checkboxSelectHandler} 
+                                                        />
+                                                )
+                                            })
+                                        }
+                                    </ul>
                                 </div>
 
                             </div>
                         </div>
                     </div>
+                    
+                    {/*  Filtered News List Result */}
                     <div className="filteredNews__right">
 
                         {/* Filtered Header */}
@@ -190,28 +227,24 @@ const DetailNews = (props) => {
                         </div>
                         
                          <div className={`filteredNews--list ${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' } `}>
-                                {categoryList ?   
-                                    <ul className="categoryList__Item">
-                                        {
-                                            categoryList.length ? categoryList.map((list, index) => {
-                                                return (
-                                                    <li className="categoryCard" key={index}>
-                                                        { <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> }
-                                                    </li>
-                                                )
-                                            }) :   <CardLoader />
-                                        }
-                                    </ul>
-                                    : <div className="categoryNotFound">
-                                        <img src={NoData} className="categoryNotFoundImg" />
-                                        <div>No Categories Found</div>
-                                    </div>
-                                }
+                            {
+                                categoryList.length ? 
+                                   <ul className="categoryList__Item">
+                                    {
+                                        categoryList.length && categoryList.map((list, index) => {
+                                            return (
+                                                <li className="categoryCard" key={index}>
+                                                    { <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> }
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul> : <CardLoader />
+                            } 
                         </div>
 
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -219,3 +252,9 @@ const DetailNews = (props) => {
 }
 
 export default DetailNews;
+
+
+// <div className="categoryNotFound">
+//     <img src={NoData} className="categoryNotFoundImg" />
+//     <div>No Categories Found</div>
+// </div>

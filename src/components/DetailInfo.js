@@ -12,21 +12,23 @@ const DetailInfo = (props) => {
 
     useEffect(() => {
         const setIndiDetailFunc = () => {
-            let cardDetail = props.history.location.query.cardDetail;
-            if(cardDetail === 'undefined'){
-                props.history.push('/')
-            }
-            else{
+            let cardDetail = props.location.data; 
                 return setIndiDetail(cardDetail)
-            }
+            // if(cardDetail === undefined){
+            //     return props.history.push('/');
+            // }
+            // else{
+            //     return setIndiDetail(cardDetail)
+            // }
         }
 
         setIndiDetailFunc();
-    }, []);
+
+    }, [indiDetail]);
 
     return (
         <div className="detailInfo__wrapper">
-            <div className="container">
+         <div className="container">
                 <div className="detailInfo">
                     {
                         indiDetail ?
@@ -57,14 +59,8 @@ const DetailInfo = (props) => {
                                 </a>
                             </div>
                         </>
-                        :  <div className="categoryNotFound">
-                            <img src={NoData} className="categoryNotFoundImg" />
-                            <div>No Categories Found</div>
-                        </div>
+                        :  ""
                     }
-                    <div className="detailInfo__right">
-                        Hello
-                    </div>
                 </div>
             </div>
         </div>
@@ -72,3 +68,9 @@ const DetailInfo = (props) => {
 }
 
 export default DetailInfo;
+
+
+// <div className="categoryNotFound">
+//                             <img src={NoData} className="categoryNotFoundImg" />
+//                             <div>No Categories Found</div>
+//                         </div>

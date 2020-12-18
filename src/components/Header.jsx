@@ -93,7 +93,7 @@ function Header() {
                                 <NavLink to="/categories"  activeClassName="active">Personalized News</NavLink>
                             </li>
                             <li className="appHeader__listItem">
-                                <NavLink to="/contact">Contact</NavLink>
+                                <NavLink to="/contact" activeClassName="active">Contact</NavLink>
                             </li>
                         </ul>
 

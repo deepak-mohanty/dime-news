@@ -16,6 +16,10 @@
         justify-content: space-between;
         padding: 24px 0;
 
+        @media screen and (max-width: 767px) {
+            padding: 16px 0;
+        }
+
         a {
             border: none;
             font-size: 16px;
@@ -43,6 +47,11 @@
             display: flex;
             align-items: center;
 
+            @media screen and (max-width: 991px) {
+                width: 40px;
+                height: 40px;
+            }
+
             img {
                 width: 100%;
                 height: 100%;
@@ -56,11 +65,18 @@
             font-weight: 600;
             font-size: 24px;
             position: relative;
+            @media screen and (max-width: 1023px) {
+                font-size: 22px;
+            }
         }
 
         .appHeader_content {
             display: flex;
             align-items: center;
+
+            @media screen and (max-width: 767px) {
+                display: none;
+            }
 
             .appHeader__list {
                 display: flex;
@@ -104,7 +120,7 @@
                         }
                     }
 
-                    span{
+                    span {
                         font-weight: 500;
                         font-size: 16px;
                     }

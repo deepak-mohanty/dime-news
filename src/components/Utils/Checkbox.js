@@ -6,7 +6,7 @@ import '../../assets/styles/checkbox.scss';
 const Checkbox = ({label, onChange, checked, name, id}) => {
 
     return (
-      <ul className="unstyled centered">
+  
         <li>
             <input className="styled-checkbox" 
                 id={`styled-checkbox-${id}`} 
@@ -17,7 +17,6 @@ const Checkbox = ({label, onChange, checked, name, id}) => {
             />
             <label htmlFor={`styled-checkbox-${id}`} >{label}</label>
         </li>
-      </ul>
     )
 };
 

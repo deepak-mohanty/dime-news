@@ -6,6 +6,7 @@ function Category() {
         <div className="personalisedNews__wrapper">
             <div className="container">
                 <Pagination />
+                <div>Hello From Category Personalization</div>
             </div>
         </div>
     )

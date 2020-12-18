@@ -1,6 +1,9 @@
 .breadcrumb {
     display: flex;
     flex-direction: row;
+    @media screen and (max-width: 767px){
+        padding-bottom: 16px;
+    }
 
     li {
         padding: 8px 30px 8px 0;
