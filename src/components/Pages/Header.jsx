@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Moment from 'moment';
-import {weatherApiInstance} from '../apis/api';
+import {weatherApiInstance} from '../../apis/api';
 
-import '../assets/styles/header.scss';
-import brandLogo from '../assets/images/news.png';
+import './../../assets/styles/header.scss';
+import brandLogo from './../../assets/images/news.png';
 
 function Header() {
     const [navbar, setNavbar] = useState(false);

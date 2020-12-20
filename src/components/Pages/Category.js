@@ -1,5 +1,5 @@
 import React from 'react'
-import Pagination from './Utils/Pagination';
+import Pagination from '../Utils/Pagination';
 
 function Category() {
     return (

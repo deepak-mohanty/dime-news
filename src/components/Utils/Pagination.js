@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function Pagination() {
+const Pagination = () => {
     return (
         <div>
             Hello from Paginatin

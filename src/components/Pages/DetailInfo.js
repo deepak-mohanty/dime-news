@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 
-import '../assets/styles/detailInfo.scss';
-import published from '../assets/images/published.svg';
-import user from '../assets/images/user.svg';
-import backArrow from '../assets/images/arrow-left.svg';
-import NoData from '../assets/images/no-data.png';
+import './../../assets/styles/detailInfo.scss';
+import published from './../../assets/images/published.svg';
+import user from './../../assets/images/user.svg';
+import backArrow from './../../assets/images/arrow-left.svg';
+import NoData from './../../assets/images/no-data.png';
 
 const DetailInfo = (props) => {
     const [indiDetail, setIndiDetail] = useState([]);

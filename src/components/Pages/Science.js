@@ -1,8 +1,8 @@
 import React,{useState, useEffect} from 'react';
-import {newsApiInstance} from '../apis/api';
+import {newsApiInstance} from '../../apis/api';
 
-import '../assets/styles/individualInfo.scss';
-import TopCards from './Cards/TopCards';
+import './../../assets/styles/individualInfo.scss';
+import TopCards from '../Cards/TopCards';
 
 function ScienceNews(props) {
 

@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react';
 
-import {newsApiInstance} from '../apis/api';
+import {newsApiInstance} from '../../apis/api';
 import HeroTrending from './HeroTrending';
 import NewsHighlights from './NewsHighlights';
 import SportsNews from './SportsNews';
 import Technology from './Technology';
-import General from './Pages/General';
+import General from './General';
 import Entertainment from './Entertainment';
 import Business from './Business';
 import HealthNews from './Health';
 import ScienceNews from './Science';
-import ScrollToTop from './Utils/ScrollToTop';
+import ScrollToTop from '../Utils/ScrollToTop';
 
-import '../assets/styles/home.scss';
+import './../../assets/styles/home.scss';
 
 function Home() {
 

@@ -156,7 +156,8 @@
 //Detail List
 .categoryList {
     padding: 60px 0;
-    @media screen and (max-width: 767px){
+
+    @media screen and (max-width: 767px) {
         padding: 36px 0 60px 0;
         margin-bottom: 40px;
     }
@@ -268,14 +269,16 @@
     .innerHeader {
         position: relative;
         padding-bottom: 80px;
-        @media screen and (max-width: 767px){
+
+        @media screen and (max-width: 767px) {
             padding-bottom: 56px;
         }
 
         .innerHeader__details {
             display: flex;
             justify-content: space-between;
-            @media screen and (max-width: 767px){
+
+            @media screen and (max-width: 767px) {
                 flex-direction: column;
             }
         }
@@ -381,6 +384,65 @@ button {
             outline: none;
             border-color: var(--border-color);
             box-shadow: 0 0 1px var(--border-color) !important;
+        }
+    }
+}
+
+//Pagination css
+.paginaion-wrapper {
+    width: 100%;
+    height: auto;
+    padding: 60px 0;
+
+    ul {
+        display: flex;
+        list-style: none;
+        justify-content: center;
+
+        li {
+            a {
+                color: var(--text-primary);
+                padding: 8px 16px;
+                border-right: none !important;
+                line-height: 2.5;
+
+                &:hover {
+                    background-color: var(--white-background) !important;
+                }
+            }
+
+            &:last-child {
+                a {
+                    border-right: 1px solid var(--brand-color) !important;
+                }
+            }
+
+            &.selected {
+                background-color: var(--brand-color);
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:hover {
+                    a {
+                        background-color: var(--brand-color);
+                        color: var(--text-white) !important;
+                    }
+                }
+
+                a {
+                    color: var(--text-white) !important;
+                }
+            }
+
+            &.pagination__link--active {
+                a {
+                    outline: none;
+                    background-color: var(--brand-color);
+                    color: var(--text-white) !important;
+                }
+            }
         }
     }
 }

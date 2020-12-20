@@ -1,8 +1,105 @@
-.contactBanner__wrapper {
-    width: 100%;
-    img {
+.contact__wrapper {
+    .contactImg__wrapper {
         width: 100%;
-        height: 550px;
-        object-fit: cover;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+        }
+
+        .contactImg--content {
+            position: absolute;
+            color: #fff;
+            bottom: 150px;
+            z-index: 2;
+
+            .contactMe {
+                text-transform: uppercase;
+                font-size: 18px;
+                padding-bottom: 20px;
+            }
+
+            .letsConnect {
+                font-size: 48px;
+                font-weight: 600;
+                padding-bottom: 40px;
+            }
+
+        }
+    }
+}
+
+.contact__content--wrapper {
+    padding: 60px 0;
+
+    .tab-manager {
+        display: flex;
+        padding-bottom: 30px;
+        justify-content: center;
+        position: relative;
+        width: 800px;
+        margin: 0 auto;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            z-index: -1;
+            border-radius: inherit;
+            background: linear-gradient(to right, red, orange)
+        }
+
+        .tab {
+            padding: 12px;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            padding: 12px 36px;
+            margin: 0 24px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.5s ease;
+            color: black;
+            user-select: none;
+            position: relative;
+
+            &:hover {
+                background-color: rgba(0, 43, 73, 0.17);
+            }
+
+            &.selected-tab {
+                background-color: var(--brand-color);
+                color: white;
+            }
+
+        }
+    }
+
+}
+
+.tab-content {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+
+    .form__header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 500;
+        padding-bottom: 18px;
+    }
+
+    .tabSelected {
+        display: inline;
+    }
+
+    .tabHidden {
+        display: none;
     }
 }

@@ -1,22 +1,22 @@
 import React, {useState, useEffect } from 'react';
-import AppBreadCrumbs from '../AppBreadCrumbs';
+import AppBreadCrumbs from '../../AppBreadCrumbs';
 import {Link} from 'react-router-dom';
-import RadioButton from './Utils/Radio';
-import Checkbox from './Utils/Checkbox';
-import {newsApiInstance} from '../apis/api';
+import RadioButton from '../Utils/Radio';
+import Checkbox from '../Utils/Checkbox';
+import {newsApiInstance} from '../../apis/api';
 import Select from 'react-select';
-import CardLoader from './Utils/CardLoader';
-import ScrollToTop from './Utils/ScrollToTop';
-import SortBy from './Utils/SortBy';
+import CardLoader from '../Utils/CardLoader';
+import ScrollToTop from '../Utils/ScrollToTop';
+import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 
-import NoData from '../assets/images/no-data.png';
-import backArrow from '../assets/images/arrow-left.svg';
-import ListView from '../assets/images/list.svg';
-import GridView from '../assets/images/grid.svg';
-import '../assets/styles/individualInfo.scss';
-import '../assets/styles/filteredNews.scss';
-import Card from './Cards/Card';
+import NoData from './../../assets/images/no-data.png';
+import backArrow from './../../assets/images/arrow-left.svg';
+import ListView from './../../assets/images/list.svg';
+import GridView from './../../assets/images/grid.svg';
+import './../../assets/styles/individualInfo.scss';
+import './../../assets/styles/filteredNews.scss';
+import Card from '../Cards/Card';
 
 
 const DetailNews = (props) => {
@@ -34,6 +34,13 @@ const DetailNews = (props) => {
     const [checkedValue, setCheckedValue] = useState(selectedCategory);
     const [isChecked, setIsChecked] = useState(false);
     const [domainsValues, setDomainsValues] = useState("");
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPageCount, setTotalPageCount] = useState(null);
+
+    const PER_PAGE = 9
+    const offset = currentPage * PER_PAGE;
+    const currentPageData = categoryList.slice(offset, offset + PER_PAGE).map(({ thumburl }) => <img src={thumburl} />);
+    const pageCount = Math.ceil(totalPageCount / PER_PAGE);
 
     const sortByOptions = [
         {value: "publishedAt", label: "PublishedAt"},
@@ -70,12 +77,13 @@ const DetailNews = (props) => {
                         sources: allSources,
                         language: 'en',
                         sortBy: sortBy,
-                        page: 1,
-                        pageSize: 100
+                        page: currentPage + 1,
+                        pageSize: 9
                     }
                 });
 
                 setCategoryList(response.data.articles);
+                setTotalPageCount(response.data.totalResults);
             }
             catch(error){
                 console.log('Error', error.message)
@@ -131,6 +139,10 @@ const DetailNews = (props) => {
         setIsChecked(checked)
         setDomainsValues(value)
     }
+
+     const handlePageClick = ({ selected: selectedPage }) => {
+       setCurrentPage(selectedPage)
+     }
 
     return (
         <div className="categoryList">
@@ -229,17 +241,38 @@ const DetailNews = (props) => {
                          <div className={`filteredNews--list ${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' } `}>
                             {
                                 categoryList.length ? 
-                                   <ul className="categoryList__Item">
-                                    {
-                                        categoryList.length && categoryList.map((list, index) => {
-                                            return (
-                                                <li className="categoryCard" key={index}>
-                                                    { <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> }
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul> : <CardLoader />
+                                    (<React.Fragment>
+
+                                        <ul className="categoryList__Item">
+                                            {
+                                                categoryList.length && categoryList.map((list, index) => {
+                                                    return (
+                                                        <li className="categoryCard" key={index}>
+                                                            { <Card cardInfo={list}  viewType={`${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' }`} /> }
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul> 
+                                        <div className="paginaion-wrapper">
+                                            <ReactPaginate 
+                                                previousLabel={"← Previous"}
+                                                nextLabel={"Next →"}
+                                                pageCount={pageCount}
+                                                pageRange={2}
+                                                containerClassName={"pagination"}
+                                                previousLinkClassName={"pagination__link"}
+                                                nextLinkClassName={"pagination__link"}
+                                                disabledClassName={"pagination__link--disabled"}
+                                                pageClassName={'paginate-li'}
+                                                onPageChange={handlePageClick}
+                                                activeClassName={"pagination__link--active"}
+                                            />
+                                        </div>
+
+                                    </React.Fragment>)
+                                
+                                : <CardLoader />
                             } 
                         </div>
 
