@@ -3,7 +3,7 @@ import PropType from 'prop-types';
 
 import '../../assets/styles/checkbox.scss';
 
-const Checkbox = ({label, onChange, checked, name, id}) => {
+const Checkbox = ({label, onChange, checked, value, name, id}) => {
 
     return (
   
@@ -14,6 +14,7 @@ const Checkbox = ({label, onChange, checked, name, id}) => {
                 onChange={onChange}
                 name={name}
                 checked={checked}
+                value={value}
             />
             <label htmlFor={`styled-checkbox-${id}`} >{label}</label>
         </li>

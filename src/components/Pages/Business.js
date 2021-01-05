@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import {newsApiInstance} from '../../apis/api';
+import {newsApiInstance, cancelToken} from '../../apis/api';
 
 import './../../assets/styles/individualInfo.scss';
 import TopCards from '../Cards/TopCards';
@@ -10,8 +10,12 @@ function Business(props) {
 
     // //Top Sports useEffect
     useEffect(() => {
+
+        //Get BUsiness News API call starts
         const getBusinessNews = async () => {
+
             try{
+
                 const response = await newsApiInstance.get('/top-headlines', {
                     params: {
                         country: 'US',
@@ -21,11 +25,25 @@ function Business(props) {
                 })
                 return setBusinessNews(response.data.articles);
             }
+            
             catch(error){
-                console.error(error);
+                // if (cancelToken.isCancel(error)) {
+                //     console.log('Error: ', error.message);
+                //     return true;
+                // } else {
+                //     throw new Error(error);
+                // }
+                      console.log('Error: ', error.message);
             }
         }
+
         getBusinessNews();
+        //Get BUsiness News API call starts
+
+        // componentWillUnmount events
+        //  return () =>{
+        //     cancelToken.cancel();
+        // }
 
     }, []);
 

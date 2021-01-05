@@ -21,12 +21,19 @@ function Header() {
     }
     window.addEventListener('scroll', changeBackgroundOnScroll);
 
-    useEffect(()=>{
+    useEffect(()=> {
+        
         const getCoordinates = () => {
+
+            if (window.navigator && window.navigator.geolocation) {
+                    window.navigator.geolocation.watchPosition(success, error, options);
+                }
+            }
+
             let options = {
-                enableHighAccuracy: true, 
-                timeout: 1000, 
-                maximumAge: 100 
+                enableHighAccuracy: false, 
+                timeout: 60000, 
+                maximumAge: 75000 
             }
 
             const success = (pos) => {
@@ -42,10 +49,6 @@ function Header() {
                 console.warn(`ERROR(${err.code}): ${err.message}`); 
                   clearTimeout(options.timeout)
             } 
-            if (navigator.geolocation) {
-                window.navigator.geolocation.getCurrentPosition(success, error, options);
-            }
-        }
 
         getCoordinates();
 
@@ -134,3 +137,5 @@ function Header() {
 export default Header;
 
 // (weatherData.main.temp - 273).toFixed(2)
+
+// [categoryList, sortBy, checkedValue, sourcesValues, allSources]

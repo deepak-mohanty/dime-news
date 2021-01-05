@@ -133,7 +133,7 @@
     }
 
     .featured__widgets {
-        padding-top: 48px;
+        padding-top: 92px;
         width: 330px;
     }
 }
@@ -286,7 +286,7 @@
 
     .backArrowWrapper {
         position: absolute;
-        top: 6px;
+        top: 4px;
         left: -110px;
         display: flex;
         align-items: center;
@@ -307,6 +307,7 @@
                 color: var(--text-primar);
             }
         }
+        
     }
 }
 
@@ -408,6 +409,7 @@ button {
 
                 &:hover {
                     background-color: var(--white-background) !important;
+                    cursor: pointer;
                 }
             }
 
@@ -441,6 +443,13 @@ button {
                     outline: none;
                     background-color: var(--brand-color);
                     color: var(--text-white) !important;
+                }
+            }
+
+            &.pagination__link--disabled{
+                a{
+                    cursor: none;
+                    z-index: -1;
                 }
             }
         }
