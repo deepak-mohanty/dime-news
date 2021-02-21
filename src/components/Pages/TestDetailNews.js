@@ -299,3 +299,25 @@ export default DetailNews;
 //     <img src={NoData} className="categoryNotFoundImg" />
 //     <div>No Categories Found</div>
 // </div>
+
+
+
+                                    // <div className="filteredNews__listWrapper">
+                                    // {uniqueCheckboxList.length ?  <h4 className="filteredNews__header">Domains</h4> : ""}
+                                    //     <ul className="unstyled centered">
+                                    //         {
+                                    //             uniqueCheckboxList.map((item, index) => {
+                                    //                 return (
+                                    //                         <Checkbox key={index} 
+                                    //                             value={item.value}
+                                    //                             id={index} 
+                                    //                             label={item.name} 
+                                    //                             name={item.name} 
+                                    //                             checked={isChecked[item.name]} 
+                                    //                             onChange={(e) => checkboxSelectHandler(e) } 
+                                    //                         />
+                                    //                 )
+                                    //             })
+                                    //         }
+                                    //     </ul>
+                                    // </div>

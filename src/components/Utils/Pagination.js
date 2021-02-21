@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactPaginate from 'react-paginate';
 
 const Pagination = ({perPage, totalPages, handlePageChange}) => {
 
+    const [totalPageCount, setTotalPageCount] = useState(null);
+
     const PER_PAGE = perPage;
     const pageCount = Math.ceil(totalPages / PER_PAGE);
+
+    //Pagination Handle Page CLick 
+    const handlePageClick = ({ selected: selectedPage }) => {
+       return setCurrentPage(selectedPage)
+    }
 
     return (
         <React.Fragment>
