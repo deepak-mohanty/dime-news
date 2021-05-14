@@ -22,12 +22,13 @@ function Home() {
     useEffect(() => {
         const getNews = async () => {
             try{
-                const response = await newsApiInstance.get('/top-headlines', {
+                const response = await newsApiInstance.get('/everything', {
                     params: {
-                        country: 'IN',
-                        q: 'all'
+                        q: 'all',
+                        pageSize: 100,
                     }
                 });
+                console.log(response.data)
                 return setTodaysHeadlines(response.data.articles);
             }
             catch (error) {

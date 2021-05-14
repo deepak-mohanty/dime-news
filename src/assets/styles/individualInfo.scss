@@ -184,11 +184,12 @@
 
         .categoryCard {
             z-index: 0;
-
             .card {
                 position: relative;
                 display: flex;
-                height: 270px;
+                height: 320px;
+                border-radius: 4px;
+                overflow: hidden;
 
                 &:after {
                     position: absolute;
@@ -277,6 +278,9 @@
         .innerHeader__details {
             display: flex;
             justify-content: space-between;
+            @media screen and (min-width: 768px){
+                margin-left: 110px;
+            }
 
             @media screen and (max-width: 767px) {
                 flex-direction: column;
@@ -287,7 +291,7 @@
     .backArrowWrapper {
         position: absolute;
         top: 4px;
-        left: -110px;
+        left: 0px;
         display: flex;
         align-items: center;
 
@@ -358,7 +362,7 @@ button {
 
 //Select from 'react-select
 .css-2b097c-container {
-    min-width: 150px;
+    min-width: 170px;
 
     .css-b8ldur-Input {
         input {

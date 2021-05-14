@@ -19,10 +19,6 @@
                 .filteredNews__listWrapper {
                     padding-bottom: 28px;
 
-                    &:nth-child(1) {
-                        padding-top: 20px;
-                    }
-
                     .filteredNews__header {
                         font-size: 20px;
                         font-weight: 500;
@@ -100,12 +96,16 @@
 
                     .categoryCard {
                         .card {
+                            height: 260px;
+                            border-radius: 4px;
                             &::after {
                                 background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), transparent);
                             }
 
                             .card--banner {
                                 width: 400px;
+                                transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+                                overflow: hidden;
                             }
 
                             .card--body {
@@ -124,6 +124,11 @@
                                     padding-top: 20px;
                                 }
                             }
+                            &:hover{
+                                .card--banner{
+                                    transform: scale(1.08);
+                                }
+                            }
                         }
                     }
                 }
@@ -136,6 +141,7 @@
 
                     .categoryCard {
                         .card {
+                            height: 320px !important;
                             &::after {
                                 background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent);
                             }

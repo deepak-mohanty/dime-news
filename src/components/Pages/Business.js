@@ -37,7 +37,7 @@ function Business(props) {
             }
         }
 
-        getBusinessNews();
+        // getBusinessNews();
         //Get BUsiness News API call starts
 
         // componentWillUnmount events

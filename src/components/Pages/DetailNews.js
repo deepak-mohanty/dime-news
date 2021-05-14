@@ -8,7 +8,7 @@ import ScrollToTop from '../Utils/ScrollToTop';
 import RadioButton from '../Utils/Radio';
 import Checkbox from '../Utils/Checkbox';
 import Select from 'react-select';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import CardLoader from '../Utils/CardLoader';
 import Card from '../Cards/Card';
 import _ from 'lodash';
@@ -25,7 +25,6 @@ function DetailNews(props){
     const selectedCategory = props.location.title || 'general';
 
     const [categoryList, setCategoryList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
     const [checkedValue, setCheckedValue] = useState(selectedCategory);
     const [isChecked, setIsChecked] = useState(false);
     const [domainsValues, setDomainsValues] = useState([]);
@@ -33,6 +32,9 @@ function DetailNews(props){
     const [activeListView, setACtiveListView] = useState(false);
     const [sourcesValues, setSourcesValues] = useState([]);
     const [sortBy, setSortBy] = useState('publishedAt');
+
+    const [totalPageCount, setTotalPageCount] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
     
     const _isMounted = useRef(true);
 
@@ -63,7 +65,12 @@ function DetailNews(props){
     const checkboxSelectHandler = (event) => {
         const { value, checked } = event.target;
             setIsChecked(checked);
-            setDomainsValues(domainsValues.push(value));
+            setDomainsValues([...domainsValues, domainsValues.push(value)]);
+    }
+
+    //Pagination Handle Page CLick 
+    const handlePageClick = ({ selected: selectedPage }) => {
+       return setCurrentPage(selectedPage)
     }
 
     useEffect(()=>{
@@ -74,10 +81,10 @@ function DetailNews(props){
                         params:{
                             q: checkedValue,
                             sources: allSources,
-                            domains: '',
+                            // domains: '',
                             language: 'en',
                             sortBy: sortBy,
-                            page: currentPage + 1,
+                            // page: currentPage + 1,
                             pageSize: 9
                         }
                     }
@@ -101,7 +108,7 @@ function DetailNews(props){
           _isMounted.current = false
         }
 
-    }, [categoryList, checkedValue, checkboxSelectHandler]);
+    }, [categoryList, checkedValue]);
 
     const radioSelectHandler = (e) => (
         setCheckedValue(e.target.value)
@@ -171,10 +178,6 @@ function DetailNews(props){
                             <div className="filteredNews__list">
                                 <div className="filteredNews__listItem">
 
-                                    <form>
-                                        <input type="text" placeholder="Search News, Headlines ..." />
-                                    </form>
-
                                     <div className="filteredNews__listWrapper">
                                         <h4 className="filteredNews__header">Category</h4>
                                         {
@@ -240,7 +243,7 @@ function DetailNews(props){
 
                             </div>
                             
-                            <div className={`filteredNews--list ${activeGridView ? 'filteredNews--grid' : 'filteredNews--list' } `}>
+                            <div className={`filteredNews--list ${activeGridView ? 'filteredNews--grid' : '' } `}>
                                 {
                                     categoryList.length ? 
                                         (<React.Fragment>
@@ -257,14 +260,13 @@ function DetailNews(props){
                                                 }
                                             </ul> 
                                         
-                                            <div className="paginaion-wrapper">
-                                                <Pagination perPage={9} handlePageChange={handlePageClick}  totalPages={totalPageCount} />
-                                            </div>
+                         
                                     
                                         </React.Fragment>)
                                     
                                     : <CardLoader />
                                 } 
+
                             </div>
 
                         </div>
@@ -278,4 +280,12 @@ function DetailNews(props){
 
 }
 
+                                // {totalPageCount && 
+                                //     <div className="paginaion-wrapper">
+                                //         <Pagination perPage={9} handlePageChange={handlePageClick} totalPages={totalPageCount} currentPage={currentPage} />
+                                //     </div>
+                                // }
+
 export default DetailNews;
+
+

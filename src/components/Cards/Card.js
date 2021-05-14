@@ -21,7 +21,7 @@ const Card = ({cardInfo, viewType}) => {
                         <Link to="/">{cardInfo.publishedAt.split('T')[0]}</Link>
                     </div>
                 </div>
-                  <h2 className="trending__infoHeader">
+                    <h2 className="trending__infoHeader">
                        {
                            cardInfo.title ?  <Link to={{pathname: `/${(cardInfo.title.toLowerCase()).replace(/ /g, "-")}`, data: cardInfo }}>
                             {viewType === 'filteredNews--list' ? cardInfo.title : cardInfo.title.substring(0, 40) + '...' }
