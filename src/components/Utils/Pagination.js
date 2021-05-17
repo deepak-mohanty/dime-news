@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactPaginate from 'react-paginate';
 
-const Pagination = ({perPage, totalPages, handlePageChange}) => {
+const Pagination = ({perPage, totalPages, currentPage, handlePageChange}) => {
+
+    // const [currentPage, setCurrentPage] = useState(0);
 
     const PER_PAGE = perPage;
     const pageCount = Math.ceil(totalPages / PER_PAGE);

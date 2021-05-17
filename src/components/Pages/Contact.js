@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
-import TabManager from './../Utils/TabManager';
+import React, {useState, Suspense} from 'react';
 
 import contactBanner from '../../assets/images/contact-us.jpg';
 import '../../assets/styles/contact.scss';
+
+
+const TabManager = React.lazy(() => import ('./../Utils/TabManager'));
 
 const TabList = [
   { label: "Testimonial", value: 1 },
@@ -26,7 +28,10 @@ function Contact() {
             <div className="contact__content--wrapper">
                 <div className="container">
 
-                    <TabManager tabs={TabList} activeTab={activeTab} handleTab={handleTab} />
+                    <Suspense fallback={ <div className="pre-loader">Loading</div> }>
+                        <TabManager tabs={TabList} activeTab={activeTab} handleTab={handleTab} />
+                    </Suspense>
+
                     <div className="tab-content">
                         <div className={activeTab === 1 ? 'tabSelected' : 'tabHidden'}>
                             <div className="form__header">Drop a Testimonial</div>

@@ -1,8 +1,10 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, Suspense} from 'react';
 import {newsApiInstance, cancelToken} from '../../apis/api';
 
 import './../../assets/styles/individualInfo.scss';
-import TopCards from '../Cards/TopCards';
+// import TopCards from '../Cards/TopCards';
+
+const TopCards = React.lazy(() => import ('../Cards/TopCards'));
 
 function Business(props) {
     
@@ -37,7 +39,7 @@ function Business(props) {
             }
         }
 
-        getBusinessNews();
+        // getBusinessNews();
         //Get BUsiness News API call starts
 
         // componentWillUnmount events
@@ -51,7 +53,9 @@ function Business(props) {
     const allBusinessNews = businessNews;
 
     return (
-        <TopCards title={props.heading} newsListType={bNews} newsAllList={allBusinessNews} />
+        <Suspense fallback={ <div className="pre-loader">Loading</div> }>
+            <TopCards title={props.heading} newsListType={bNews} newsAllList={allBusinessNews} />
+        </Suspense>
     )
 }
 

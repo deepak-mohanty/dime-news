@@ -1,12 +1,12 @@
 .bannerSection {
     display: flex;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 50px;
     padding: 60px 0 0 0;
 
     .slick-slider {
-        width: 730px;
+        width: 900px;
         margin: 0;
         position: relative;
 

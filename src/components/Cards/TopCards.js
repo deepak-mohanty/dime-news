@@ -16,7 +16,6 @@ const TopCards = (props) => {
                         <div className="individualInfo__section">
                             <div className="infoSection">
                                 <h2>{title} News</h2>
-                                <Link to={{ pathname: `/category/`, title: `${title.toLowerCase()}` }}>View All</Link>
                             </div>  
                             <ul className="infoSection__cards--List">
                                 {
@@ -29,6 +28,9 @@ const TopCards = (props) => {
                                     })
                                 }
                             </ul>
+                            <div className="btn-text-center">
+                                <Link to={{ pathname: `/category/`, title: `${title.toLowerCase()}` }} className="btn btn-primary"> Show More Articles </Link>
+                            </div>
                         </div>
                 ) : ""
             }
