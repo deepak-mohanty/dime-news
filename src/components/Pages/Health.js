@@ -25,7 +25,7 @@ function HealthNews(props) {
                 console.error(error);
             }
         }
-        getHealthNews();
+        // getHealthNews();
     }, [])
 
     const healthNewsThree = healthNews.splice(0,3);
