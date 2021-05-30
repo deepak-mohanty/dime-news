@@ -36,7 +36,7 @@ function Home() {
             }
         };
 
-        getNews();
+        // getNews();
 
     },[]);
 

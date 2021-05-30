@@ -266,7 +266,6 @@ function DetailNews(props){
                                     
                                     : <CardLoader />
                                 } 
-
                             </div>
 
                         </div>

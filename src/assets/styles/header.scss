@@ -1,30 +1,31 @@
 .appHeader {
-    // border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 99;
     background-color: transparent;
 
     &.active {
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
-        background-color: var(--white-background);
+        background: #fcfcfc;
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
     }
 
     .appHeader--wrapper {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        padding: 24px 0;
+        padding: 36px 0 0 0;
 
         @media screen and (max-width: 767px) {
-            padding: 16px 0;
+            padding: 28px 0 0 0;
         }
 
         a {
             border: none;
             font-size: 16px;
             color: var(--text-primary);
-            padding: 10px 22px 10px 20px;
+            // padding: 10px 22px 10px 20px;
 
             &:last-child {
                 padding-right: 0;
@@ -40,34 +41,161 @@
             }
         }
 
+        .appHeaderTop--wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @media screen and (max-width: 767px) {
+                justify-content: center;
+            }
+
+            .appHeaderTop__right {
+                @media screen and (max-width: 767px) {
+                    display: none;
+                }
+
+                a {
+                    &:first-child {
+                        font-size: 14px;
+                    }
+                }
+
+                .btn {
+                    font-size: 14px;
+                    font-weight: 400 !important;
+                }
+            }
+        }
+
+        .appHeader__subHeader {
+            width: 100%;
+            padding: 56px 0 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @media screen and (max-width: 767px) {
+                padding: 28px 0 14px 0;
+                overflow-y: auto;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            .appHeader__subHeaderList {
+                display: flex;
+                list-style: none;
+                margin: 0;
+
+                li {
+                    padding: 0 48px 0 0;
+
+                    @media screen and (max-width: 767px) {
+                        padding-right: 24px;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+                    }
+
+                    .appHeader__subHeaderListItem {
+                        padding: 0;
+
+                        &.active {
+                            background-color: transparent;
+                            position: relative;
+
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                left: -5px;
+                                bottom: -22px;
+                                background-color: var(--brand-color);
+                                width: 120%;
+                                height: 2px;
+
+                                @media screen and (max-width: 767px) {
+                                    bottom: -16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .appHeader__subHeader--right {
+            display: flex;
+            align-items: center;
+
+            .appHeader__subHeader--rightList {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                padding: 0 48px 0 0;
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                img {
+                    width: 22px;
+                    height: 24px;
+                    margin-right: 12px;
+                }
+
+                &.searchCustomNews {
+                    input {
+                        display: none;
+                    }
+
+                    #newsSearchForm {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+
         .appHeaderLogo {
-            width: 50px;
-            height: 50px;
+            // width: 50px;
+            // height: 50px;
             padding: 0;
             display: flex;
             align-items: center;
 
-            @media screen and (max-width: 991px) {
-                width: 40px;
-                height: 40px;
-            }
+            // @media screen and (max-width: 991px) {
+            //     width: 40px;
+            //     height: 40px;
+            // }
 
             img {
                 width: 100%;
                 height: 100%;
             }
-        }
 
-        .appHeaderName {
-            font-weight: 400;
-            white-space: pre;
-            padding-left: 10px;
-            font-weight: 600;
-            font-size: 24px;
-            position: relative;
-            @media screen and (max-width: 1023px) {
-                font-size: 22px;
+            .appHeaderName {
+                white-space: pre;
+                padding-left: 10px;
+                font-weight: 600;
+                font-size: 36px;
+                color: var(--brand-color);
+                letter-spacing: 1px;
+                font-family: 'Abril Fatface', cursive;
+                position: relative;
+
+                @media screen and (max-width: 767px) {
+                    font-size: 28px;
+                    padding-left: 0;
+                }
             }
+
         }
 
         .appHeader_content {
@@ -97,9 +225,14 @@
                 .appHeader__infoItem {
                     text-decoration: none;
                     list-style-type: none;
-                    font-size: 14px;
-                    padding-right: 30px;
+                    font-size: 10px;
+                    padding-right: 20px;
                     position: relative;
+
+                    &:first-child {
+                        display: flex;
+                        align-items: center;
+                    }
 
                     &:after {
                         content: '';
@@ -108,7 +241,7 @@
                         background-color: var(--text-primary);
                         height: 20px;
                         background-color: var(--border-color);
-                        right: 14px;
+                        right: 10px;
                         top: 0px;
                     }
 
@@ -121,8 +254,8 @@
                     }
 
                     span {
-                        font-weight: 500;
-                        font-size: 16px;
+                        font-weight: 400;
+                        font-size: 14px;
                     }
 
                     .weatherInfo {
@@ -137,7 +270,7 @@
                         .tempDetails {
                             .temp {
                                 text-align: center;
-                                font-size: 18px;
+                                font-size: 14px;
 
                                 sup {
                                     font-size: 10px;
